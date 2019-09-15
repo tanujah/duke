@@ -7,5 +7,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         //Test Git Push & Pull
+
+        //test again on pull and push
     }
 }
