@@ -15,32 +15,68 @@ public class Duke {
         int count = 0;
         line = in.nextLine();
         task[] myTaskList;
-
+        String time = null;
+        String[] toExtaction = null;
+        String des =  null;
         // Create an array:
         myTaskList = new  task[10];
 
         while (!line.equals("bye"))
         {
+            String switchCase = null;
 //            list[count] = line;
-            //splitting the input string for white spaces
-            String[] arrOfStr = line.split(" ");
-            //adding switch statement for input string
-            switch (arrOfStr[0]){
-                case "list": //printing all list elements
+            if(line == "list"){
+                switchCase = "list";
+            } else{
+                String[] toExtaction1 = line.split(" ",2);
+                toExtaction  = toExtaction1;
+                switchCase = toExtaction[0];
+            }
+
+            switch (switchCase){
+                case "list":
                     for (int a = 1; a <= count; a++){
-                        System.out.println(a+". "+myTaskList[a-1].getStatusIcon()+" " + myTaskList[a-1].description);
+                        System.out.print(a+" ");myTaskList[a-1].taskprint();
                     }
                     break;
                 case "done":
-                    int number = Integer.parseInt(arrOfStr[1]);
+                    int number = Integer.parseInt(toExtaction[1]);
                     myTaskList[number-1].isDone = true;
                     System.out.println("Nice! I have marked this task as done:");
-                    System.out.println(myTaskList[number-1].getStatusIcon()+" "+myTaskList[number-1].description);
+                    myTaskList[number-1].taskprint();
+                    break;
+                case "todo":
+                    des= toExtaction[1];
+                    myTaskList[count] = new task(des,'T');
+                    System.out.println("Got it. I have added this task:");
+                    myTaskList[count].taskprint();
+                    count++;
+                    System.out.println("Now you have "+count+" task in the list");
+                    break;
+                case "deadline":
+                    String[] split= toExtaction[1].split("/by",2);
+                    des = split[0];
+                    time = split[1];
+                    myTaskList[count] = new task(des,'D');
+                    myTaskList[count].settime(time);
+                    System.out.println("Got it. I have added this task:");
+                    myTaskList[count].taskprint();
+                    count++;
+                    System.out.println("Now you have "+count+" task in the list");
+                    break;
+                case "event":
+                    String[] split1= toExtaction[1].split("/at",2);
+                    des = split1[0];
+                    time = split1[1];
+                    myTaskList[count] = new task(des,'E');
+                    myTaskList[count].settime(time);
+                    System.out.println("Got it. I have added this task:");
+                    myTaskList[count].taskprint();
+                    count++;
+                    System.out.println("Now you have "+count+" task in the list");
                     break;
                 default:
-                    System.out.println("added: " + line);
-                    myTaskList[count] = new task(line);
-                    count++;
+                    System.out.println("something went wrong");
                     break;
             }
             line = in.nextLine();
