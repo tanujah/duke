@@ -1,6 +1,9 @@
+package duke.task;
+
 public  class task {
+
     protected String description;
-    protected boolean isDone;
+    public boolean isDone;
 
     public task(String description) {
         this.description = description;
@@ -12,7 +15,11 @@ public  class task {
     }
 
     public  String toString()  {
-
         return getStatusIcon() + " "+this.description;
+    }
+
+    public String forFile() {
+        System.out.println("this function is calling");
+        return  null;
     }
 }
